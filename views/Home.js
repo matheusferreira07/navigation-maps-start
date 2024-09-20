@@ -17,7 +17,7 @@ export default function Home(props) {
   const PRECO_POR_KM = 3  // preço de R$3 por km
 
   useEffect(() => {
-    console.log('CHAVE API: ', MAPS_API_KEY)
+    console.log(MAPS_API_KEY);
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
@@ -32,7 +32,7 @@ export default function Home(props) {
       })
     })();
   }, []);
-  
+
 
   useEffect(() => {
     if (Platform.OS === 'android') {
@@ -53,7 +53,7 @@ export default function Home(props) {
         loadingEnabled={true}
         ref={mapEl}
       >
-        { destination &&
+        {destination &&
           <MapViewDirections
             origin={origin}
             destination={destination}
@@ -64,17 +64,17 @@ export default function Home(props) {
             precision={"high"}
             onReady={result => {
               setDistance(result.distance)
-              setPrice(result.distance*PRECO_POR_KM)
+              setPrice(result.distance * PRECO_POR_KM)
               // console.log(result)  // mostrar o array de coordenadas
               mapEl.current.fitToCoordinates(
                 result.coordinates, {
-                  edgePadding: {  // para que a rota traçada não fique muito próxima da borda
-                    top: 50,
-                    bottom: 50,
-                    left: 50,
-                    right: 50
-                  }
+                edgePadding: {  // para que a rota traçada não fique muito próxima da borda
+                  top: 50,
+                  bottom: 50,
+                  left: 50,
+                  right: 50
                 }
+              }
               );
             }}
           />
@@ -100,8 +100,8 @@ export default function Home(props) {
           enablePoweredByContainer={false}
           fetchDetails={true}  // da os resultados da busca em detalhes
           styles={{
-            listView: {backgroundColor: '#fff', zIndex: 10},
-            container: {position: "absolute", width: '100%'},
+            listView: { backgroundColor: '#fff', zIndex: 10 },
+            container: { position: "absolute", width: '100%' },
           }}
         />
         {distance &&
@@ -113,7 +113,7 @@ export default function Home(props) {
                   price: price.toFixed(2),
                   address: address
                 }
-                )}>
+              )}>
               <View style={styles.price_view}>
                 <MaterialIcons name={"payment"} size={24} color="white" />
                 <Text style={styles.price__text}>
